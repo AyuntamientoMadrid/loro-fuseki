@@ -27,9 +27,9 @@ services:
       # -- Authentication ----------------------------------------------------
       # Admin password is required. The default below is suitable for local
       # development; override via `.env` for any production-like deployment.
-      IACBX_ADMIN_PASSWORD: ${IACBX_ADMIN_PASSWORD:-admin}
-      IACBX_APP_PASSWORD: ${IACBX_APP_PASSWORD:-}
-      IACBX_READ_PASSWORD: ${IACBX_READ_PASSWORD:-}
+      LORO_ADMIN_PASSWORD: ${LORO_ADMIN_PASSWORD:-admin}
+      LORO_APP_PASSWORD: ${LORO_APP_PASSWORD:-}
+      LORO_READ_PASSWORD: ${LORO_READ_PASSWORD:-}
 
       # -- Auto-load TTL files from /staging on first start -----------------
       LOAD_DATA_ON_START: ${LOAD_DATA_ON_START:-true}

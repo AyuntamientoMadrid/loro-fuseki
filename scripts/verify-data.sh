@@ -7,8 +7,8 @@ set -e
 
 FUSEKI_URL="${FUSEKI_URL:-http://localhost:3030}"
 # Credentials: default to the local-dev admin user/password; override via env vars
-ADMIN_USER="${ADMIN_USER:-iacbx_admin}"
-ADMIN_PASS="${ADMIN_PASS:-${IACBX_ADMIN_PASSWORD:-admin}}"
+ADMIN_USER="${ADMIN_USER:-loro_admin}"
+ADMIN_PASS="${ADMIN_PASS:-${LORO_ADMIN_PASSWORD:-admin}}"
 
 echo "=== Verificación de Datos LoRO ==="
 echo ""

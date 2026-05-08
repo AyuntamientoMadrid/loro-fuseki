@@ -11,9 +11,9 @@
 #   5. Starts Fuseki on $PORT in the foreground.
 #
 # Three-role model:
-#   iacbx_read   — SPARQL query / Graph Store Protocol (read)
-#   iacbx_app    — same as read + SPARQL Update / GSP write
-#   iacbx_admin  — same as app + server admin (UI, /$/* admin API)
+#   loro_read   — SPARQL query / Graph Store Protocol (read)
+#   loro_app    — same as read + SPARQL Update / GSP write
+#   loro_admin  — same as app + server admin (UI, /$/* admin API)
 #
 # ==============================================================================
 
@@ -30,9 +30,9 @@ DATASET_NAME="loro"
 STAGING_DIR="/staging"
 
 # -- Credentials (from environment variables) ---------------------------------
-IACBX_READ_PASSWORD="${IACBX_READ_PASSWORD:-}"
-IACBX_APP_PASSWORD="${IACBX_APP_PASSWORD:-}"
-IACBX_ADMIN_PASSWORD="${IACBX_ADMIN_PASSWORD:-}"
+LORO_READ_PASSWORD="${LORO_READ_PASSWORD:-}"
+LORO_APP_PASSWORD="${LORO_APP_PASSWORD:-}"
+LORO_ADMIN_PASSWORD="${LORO_ADMIN_PASSWORD:-}"
 
 # -- Logging colors -----------------------------------------------------------
 RED='\033[0;31m'
@@ -48,18 +48,18 @@ log_error() { echo -e "${RED}[ERROR]${NC} $*"; }
 # 1. Validate credentials
 # ==============================================================================
 validate_credentials() {
-    if [ -z "${IACBX_ADMIN_PASSWORD}" ]; then
-        log_error "IACBX_ADMIN_PASSWORD is not set (required to start the server)."
+    if [ -z "${LORO_ADMIN_PASSWORD}" ]; then
+        log_error "LORO_ADMIN_PASSWORD is not set (required to start the server)."
         log_error "Set it as an environment variable, e.g. via docker-compose .env."
         exit 1
     fi
 
-    if [ -z "${IACBX_APP_PASSWORD}" ]; then
-        log_warn "IACBX_APP_PASSWORD not set — iacbx_app user will not be available."
+    if [ -z "${LORO_APP_PASSWORD}" ]; then
+        log_warn "LORO_APP_PASSWORD not set — loro_app user will not be available."
     fi
 
-    if [ -z "${IACBX_READ_PASSWORD}" ]; then
-        log_warn "IACBX_READ_PASSWORD not set — iacbx_read user will not be available."
+    if [ -z "${LORO_READ_PASSWORD}" ]; then
+        log_warn "LORO_READ_PASSWORD not set — loro_read user will not be available."
     fi
 }
 
@@ -74,23 +74,23 @@ generate_shiro() {
 
     local users_section=""
 
-    # iacbx_admin — always present (validated above)
-    users_section+="iacbx_admin = ${IACBX_ADMIN_PASSWORD}, admin, app, read"
+    # loro_admin — always present (validated above)
+    users_section+="loro_admin = ${LORO_ADMIN_PASSWORD}, admin, app, read"
     users_section+=$'\n'
-    log_info "  iacbx_admin configured (roles: admin, app, read)"
+    log_info "  loro_admin configured (roles: admin, app, read)"
 
-    # iacbx_app — only if password is set
-    if [ -n "${IACBX_APP_PASSWORD}" ]; then
-        users_section+="iacbx_app = ${IACBX_APP_PASSWORD}, app, read"
+    # loro_app — only if password is set
+    if [ -n "${LORO_APP_PASSWORD}" ]; then
+        users_section+="loro_app = ${LORO_APP_PASSWORD}, app, read"
         users_section+=$'\n'
-        log_info "  iacbx_app configured (roles: app, read)"
+        log_info "  loro_app configured (roles: app, read)"
     fi
 
-    # iacbx_read — only if password is set
-    if [ -n "${IACBX_READ_PASSWORD}" ]; then
-        users_section+="iacbx_read = ${IACBX_READ_PASSWORD}, read"
+    # loro_read — only if password is set
+    if [ -n "${LORO_READ_PASSWORD}" ]; then
+        users_section+="loro_read = ${LORO_READ_PASSWORD}, read"
         users_section+=$'\n'
-        log_info "  iacbx_read configured (roles: read)"
+        log_info "  loro_read configured (roles: read)"
     fi
 
     cat > "${shiro_dir}/shiro.ini" <<EOF
@@ -146,8 +146,8 @@ EOF
 load_staging_data() {
     local fuseki_url="http://localhost:${PORT}"
     local namespace_base="http://maia.madrid.es/ontologies/loro"
-    local auth_user="iacbx_admin"
-    local auth_pass="${IACBX_ADMIN_PASSWORD}"
+    local auth_user="loro_admin"
+    local auth_pass="${LORO_ADMIN_PASSWORD}"
 
     if [ ! -d "${STAGING_DIR}" ] || [ -z "$(ls -A ${STAGING_DIR}/*.ttl 2>/dev/null)" ]; then
         log_info "No TTL files found in ${STAGING_DIR}; skipping data load."
@@ -252,7 +252,7 @@ start_fuseki() {
     log_info "JVM_ARGS:       ${JVM_ARGS}"
     log_info "Read-only:      ${FUSEKI_READONLY}"
     log_info "Auto-load data: ${LOAD_DATA_ON_START}"
-    log_info "Active users:   iacbx_admin$([ -n "${IACBX_APP_PASSWORD}" ] && echo ', iacbx_app')$([ -n "${IACBX_READ_PASSWORD}" ] && echo ', iacbx_read')"
+    log_info "Active users:   loro_admin$([ -n "${LORO_APP_PASSWORD}" ] && echo ', loro_app')$([ -n "${LORO_READ_PASSWORD}" ] && echo ', loro_read')"
     log_info "============================================"
 
     validate_credentials

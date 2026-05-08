@@ -14,9 +14,9 @@
 #
 # Runtime environment variables:
 #   PORT                 - HTTP port the server listens on (default: 8080)
-#   IACBX_ADMIN_PASSWORD - Admin password (REQUIRED to start)
-#   IACBX_APP_PASSWORD   - Optional app-role password (write access)
-#   IACBX_READ_PASSWORD  - Optional read-only password (SPARQL query)
+#   LORO_ADMIN_PASSWORD - Admin password (REQUIRED to start)
+#   LORO_APP_PASSWORD   - Optional app-role password (write access)
+#   LORO_READ_PASSWORD  - Optional read-only password (SPARQL query)
 #   JVM_ARGS             - JVM tuning (default: -Xmx2g -Xms512m)
 #   FUSEKI_READONLY      - "true" disables write endpoints
 #   LOAD_DATA_ON_START   - "true" auto-loads TTL files from /staging at first run
@@ -80,9 +80,9 @@ WORKDIR /fuseki
 # -- Default environment ------------------------------------------------------
 # Passwords have no default in the image (set them in docker-compose or runtime)
 ENV PORT=8080 \
-    IACBX_ADMIN_PASSWORD="" \
-    IACBX_APP_PASSWORD="" \
-    IACBX_READ_PASSWORD="" \
+    LORO_ADMIN_PASSWORD="" \
+    LORO_APP_PASSWORD="" \
+    LORO_READ_PASSWORD="" \
     JVM_ARGS="-Xmx2g -Xms512m" \
     FUSEKI_READONLY="false" \
     LOAD_DATA_ON_START="false" \

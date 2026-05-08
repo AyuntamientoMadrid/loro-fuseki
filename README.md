@@ -22,7 +22,7 @@ After it boots you have:
 | LoRO ontology v1.0 | [Zenodo deposit](https://doi.org/10.5281/zenodo.20076577) | Baked into the image at `ontology/loro.ttl` |
 | Cibelex Knowledge Graph | [Hugging Face dataset](https://huggingface.co/datasets/MAIA-Madrid-IA/cibelex-graph-core-sampler) | Downloaded by you with `./scripts/fetch-data.sh` |
 | Lucene full-text index | Built on first start | Indexes `eli:title`, `skos:prefLabel`, `geonames:name`, `eli:description` (Spanish stemmer + stopwords) |
-| Authentication | Apache Shiro, three-role IAM | `iacbx_admin` / `iacbx_app` / `iacbx_read` |
+| Authentication | Apache Shiro, three-role IAM | `loro_admin` / `loro_app` / `loro_read` |
 
 ## Quick start
 
@@ -48,7 +48,7 @@ docker compose up -d --build        # build the image and start the container
 ./scripts/verify-data.sh            # run a few SPARQL queries to confirm everything is loaded
 ```
 
-When it's done, open `http://localhost:3030` and log in as `iacbx_admin` with the password set in `.env` (default: `admin`).
+When it's done, open `http://localhost:3030` and log in as `loro_admin` with the password set in `.env` (default: `admin`).
 
 ## Running queries
 
@@ -59,7 +59,7 @@ Browse to `http://localhost:3030`, click the `loro` dataset, then the **Query** 
 ### From the command line
 
 ```bash
-curl -u iacbx_admin:admin \
+curl -u loro_admin:admin \
      -X POST http://localhost:3030/loro/sparql \
      -H "Accept: text/csv" \
      --data-urlencode "query=SELECT (COUNT(*) AS ?triples) WHERE { ?s ?p ?o }"
@@ -113,17 +113,17 @@ All knobs live in `.env` (see `.env.example`). The defaults are tuned for local 
 | `JVM_ARGS` | `-Xmx4g -Xms1g` | JVM tuning. Increase `-Xmx` for the full graph |
 | `LOAD_DATA_ON_START` | `true` | Auto-load TTL files from `/staging` on first start |
 | `FUSEKI_READONLY` | `false` | Disable write endpoints when `true` |
-| `IACBX_ADMIN_PASSWORD` | `admin` | Required to start; admin role |
-| `IACBX_APP_PASSWORD` | _empty_ | Optional write role |
-| `IACBX_READ_PASSWORD` | _empty_ | Optional read-only role |
+| `LORO_ADMIN_PASSWORD` | `admin` | Required to start; admin role |
+| `LORO_APP_PASSWORD` | _empty_ | Optional write role |
+| `LORO_READ_PASSWORD` | _empty_ | Optional read-only role |
 
 ### Authentication model
 
 Three Shiro roles, defined in `entrypoint.sh`:
 
-- **`iacbx_admin`** — full access (UI, server admin API, write, read). Required.
-- **`iacbx_app`** — same as `read` plus SPARQL Update / GSP write. Optional.
-- **`iacbx_read`** — SPARQL query and GSP read. Optional.
+- **`loro_admin`** — full access (UI, server admin API, write, read). Required.
+- **`loro_app`** — same as `read` plus SPARQL Update / GSP write. Optional.
+- **`loro_read`** — SPARQL query and GSP read. Optional.
 
 A role is only provisioned if its password env var is set. Health endpoints (`/$/ping`, `/$/status`) are always public.
 
