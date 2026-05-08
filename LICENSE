@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Ayuntamiento de Madrid (Madrid City Hall)
+Copyright (c) 2026 Ayuntamiento de Madrid (MAIA initiative)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+----------------------------------------------------------------------------
+Note on data and ontology
+
+The TTL files of the Cibelex Knowledge Graph downloaded from Hugging Face
+(MAIA-Madrid-IA/cibelex-graph-core-sampler) and the LoRO ontology bundled in
+this image (ontology/loro.ttl) are released under their own license,
+Creative Commons Attribution 4.0 International (CC-BY 4.0). See
+https://doi.org/10.5281/zenodo.20076577 for the ontology deposit and the
+Hugging Face dataset card for the graph license.

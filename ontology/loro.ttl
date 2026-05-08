@@ -1,0 +1,1305 @@
+@prefix : <http://maia.madrid.es/ontologies/def/local-regulations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://maia.madrid.es/ontologies/def/local-regulations#> .
+
+<http://maia.madrid.es/ontologies/def/local-regulations> rdf:type owl:Ontology ;
+                                                          owl:versionIRI <http://maia.madrid.es/ontologies/def/local-regulations/1.0> ;
+                                                          <http://purl.org/dc/terms/contributor> "GNOSS" ;
+                                                          <http://purl.org/dc/terms/created> "2026-01-30"^^xsd:date ;
+                                                          <http://purl.org/dc/terms/creator> "Ayuntamiento de Madrid" ;
+                                                          <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
+                                                          <http://purl.org/dc/terms/description> "LoRO extends the ELI ontology to represent local regulations, authorities, agents and events for local governments, including legal resources, subdivisions, formats, authorities and public offices."@en ,
+                                                                                                 "LoRO extiende la ontología ELI para representar normativa, competencias, agentes y eventos locales de gobiernos locales, incluyendo recursos legales, subdivisiones, formatos, competencias y cargos públicos."@es ;
+                                                          <http://purl.org/dc/terms/publisher> "Ayuntamiento de Madrid" ;
+                                                          <http://purl.org/dc/terms/title> "Local Regulation Ontology (LoRO)" ;
+                                                          <http://purl.org/vocab/vann/preferredNamespacePrefix> "loro" ;
+                                                          <http://purl.org/vocab/vann/preferredNamespaceUri> "http://maia.madrid.es/ontologies/def/local-regulations#" ;
+                                                          rdfs:comment "Esta ontología proporciona un marco integral para representar normativa local, competencias jurídicas, estructuras organizativas y procesos administrativos específicos de entidades de gobierno local. Extiende la ontología European Legislation Identifier (ELI) con conceptos de gobierno local."@es ,
+                                                                       "This ontology provides a comprehensive framework for representing local regulations, legal authorities, organizational structures, and administrative processes specific to local government entities. It extends the European Legislation Identifier (ELI) ontology with local government concepts."@en ;
+                                                          rdfs:label "Local Regulation Ontology"@en ,
+                                                                     "Ontología de Regulación Local"@es ;
+                                                          owl:versionInfo "1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+<http://purl.org/dc/terms/publisher> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/name
+<http://schema.org/name> rdf:type owl:AnnotationProperty ;
+                         rdfs:range xsd:string .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://data.europa.eu/eli/ontology#amended_by
+<http://data.europa.eu/eli/ontology#amended_by> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                rdfs:comment "Indica que un recurso legal es enmendado o modificado parcialmente por otro recurso legal."@es ,
+                                                             "Indicates that a legal resource is amended or partially modified by another legal resource."@en ;
+                                                rdfs:label "amended by (ELI)"@en ,
+                                                           "enmendado por (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#amends
+<http://data.europa.eu/eli/ontology#amends> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                            rdfs:range <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                            rdfs:comment "Indica que un recurso legal enmienda o modifica parcialmente otro recurso legal o subdivisión legal."@es ,
+                                                         "Indicates that a legal resource amends or partially modifies another legal resource or subdivision."@en ;
+                                            rdfs:label "amends (ELI)"@en ,
+                                                       "enmienda (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#changed_by
+<http://data.europa.eu/eli/ontology#changed_by> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                rdfs:comment "Indica que un recurso legal es modificado o alterado por otro recurso legal."@es ,
+                                                             "Indicates that a legal resource is changed or altered by another legal resource."@en ;
+                                                rdfs:label "changed by (ELI)"@en ,
+                                                           "modificado por (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#changes
+<http://data.europa.eu/eli/ontology#changes> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                             rdfs:range <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                             rdfs:comment "Indica que un recurso legal modifica o altera otro recurso legal o subdivisión legal."@es ,
+                                                          "Indicates that a legal resource changes or alters another legal resource or subdivision."@en ;
+                                             rdfs:label "changes (ELI)"@en ,
+                                                        "modifica (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#consolidates
+<http://data.europa.eu/eli/ontology#consolidates> rdf:type owl:ObjectProperty ;
+                                                  rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                  rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                  rdfs:comment "Property consolidates from external vocabulary"@en ,
+                                                               "Propiedad consolidates de vocabulario externo"@es ;
+                                                  rdfs:label "Consolida"@es ,
+                                                             "consolidates (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#has_annex
+<http://data.europa.eu/eli/ontology#has_annex> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                               rdfs:range :LegalResourceSubsivision ;
+                                               rdfs:comment "Property has_annex from external vocabulary"@en ,
+                                                            "Propiedad has_annex de vocabulario externo"@es ;
+                                               rdfs:label "Anexos"@es ,
+                                                          "has annex (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#has_part
+<http://data.europa.eu/eli/ontology#has_part> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain [ rdf:type owl:Class ;
+                                                            owl:unionOf ( <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                          <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                        )
+                                                          ] ;
+                                              rdfs:range <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                              rdfs:comment "Property has_part from external vocabulary"@en ,
+                                                           "Propiedad has_part de vocabulario externo"@es ;
+                                              rdfs:label "Partes/capítulos/artículos"@es ,
+                                                         "has part (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#is_about
+<http://data.europa.eu/eli/ontology#is_about> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                              rdfs:range :IsAboutPath ;
+                                              rdfs:comment "Property is_about from external vocabulary"@en ,
+                                                           "Propiedad is_about de vocabulario externo"@es ;
+                                              rdfs:label "Materias/Temas"@es ,
+                                                         "is about (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#is_embodied_by
+<http://data.europa.eu/eli/ontology#is_embodied_by> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://data.europa.eu/eli/ontology#LegalExpression> ;
+                                                    rdfs:range :Format ;
+                                                    rdfs:comment "Es materializado por"@es ,
+                                                                 "Is embodied by"@en ;
+                                                    rdfs:label "es materializado por (ELI)"@es ,
+                                                               "is embodied by (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#is_part_of
+<http://data.europa.eu/eli/ontology#is_part_of> rdf:type owl:ObjectProperty ;
+                                                owl:inverseOf <http://data.europa.eu/eli/ontology#has_part> ;
+                                                rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                rdfs:range [ rdf:type owl:Class ;
+                                                             owl:unionOf ( <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                           <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                         )
+                                                           ] ;
+                                                rdfs:comment "Property is_part_of from external vocabulary"@en ,
+                                                             "Propiedad is_part_of de vocabulario externo"@es ;
+                                                rdfs:label "Es parte de"@es ,
+                                                           "is part of (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#is_realized_by
+<http://data.europa.eu/eli/ontology#is_realized_by> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                    rdfs:range <http://data.europa.eu/eli/ontology#LegalExpression> ;
+                                                    rdfs:comment "Es realizado por"@es ,
+                                                                 "Is realized by"@en ;
+                                                    rdfs:label "es realizado por (ELI)"@es ,
+                                                               "is realized by (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#legal_value
+<http://data.europa.eu/eli/ontology#legal_value> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://data.europa.eu/eli/ontology#LegalExpression> ;
+                                                 rdfs:range :LegalValue ;
+                                                 rdfs:comment "Legal value"@en ,
+                                                              "Valor legal"@es ;
+                                                 rdfs:label "legal value (ELI)"@en ,
+                                                            "valor legal (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#passed_by
+<http://data.europa.eu/eli/ontology#passed_by> rdf:type owl:ObjectProperty ;
+                                               owl:inverseOf <http://maia.madrid.es/ontologies/def/passes_norm> ;
+                                               rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                               rdfs:range <http://xmlns.com/foaf/0.1/Agent> ;
+                                               rdfs:comment "Aprobado por"@es ,
+                                                            "Passed by"@en ;
+                                               rdfs:label "aprobado por (ELI)"@es ,
+                                                          "passed by (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#realizes
+<http://data.europa.eu/eli/ontology#realizes> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://data.europa.eu/eli/ontology#LegalExpression> ;
+                                              rdfs:range <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                              rdfs:comment "Realiza"@es ,
+                                                           "Realizes"@en ;
+                                              rdfs:label "realiza (ELI)"@es ,
+                                                         "realizes (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#refers_to
+<http://data.europa.eu/eli/ontology#refers_to> rdf:type owl:ObjectProperty ;
+                                               owl:inverseOf :associated_norm ;
+                                               rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                               rdfs:range <http://xmlns.com/foaf/0.1/Agent> ;
+                                               rdfs:comment "Refers to"@en ,
+                                                            "Refiere a"@es ;
+                                               rdfs:label "refers to (ELI)"@en ,
+                                                          "refiere a (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#relevant_for
+<http://data.europa.eu/eli/ontology#relevant_for> rdf:type owl:ObjectProperty ;
+                                                  rdfs:domain :LegalResource ;
+                                                  rdfs:range :Feature ;
+                                                  rdfs:comment "Property relevant_for from external vocabulary"@en ,
+                                                               "Propiedad relevant_for de vocabulario externo"@es ;
+                                                  rdfs:label "Lugar relevante"@es ,
+                                                             "relevant for (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#repealed_by
+<http://data.europa.eu/eli/ontology#repealed_by> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                 rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                 rdfs:comment "Indica que un recurso legal es derogado total o parcialmente por otro recurso legal."@es ,
+                                                              "Indicates that a legal resource is repealed totally or partially by another legal resource."@en ;
+                                                 rdfs:label "derogado por (ELI)"@es ,
+                                                            "repealed by (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#repeals
+<http://data.europa.eu/eli/ontology#repeals> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                             rdfs:range <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                             rdfs:comment "Indica que un recurso legal deroga total o parcialmente otro recurso legal o subdivisión legal."@es ,
+                                                          "Indicates that a legal resource repeals totally or partially another legal resource or subdivision."@en ;
+                                             rdfs:label "deroga (ELI)"@es ,
+                                                        "repeals (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#type_document
+<http://data.europa.eu/eli/ontology#type_document> rdf:type owl:ObjectProperty ;
+                                                   rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                   rdfs:range :TypeDocumentPath ;
+                                                   rdfs:comment "Property type_document from external vocabulary"@en ,
+                                                                "Propiedad type_document de vocabulario externo"@es ;
+                                                   rdfs:label "Tipo documental"@es ,
+                                                              "type document (ELI)"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/associated_norm
+<http://maia.madrid.es/ontologies/def/associated_norm> rdf:type owl:ObjectProperty ;
+                                                       owl:inverseOf <http://data.europa.eu/eli/ontology#refers_to> ;
+                                                       rdfs:domain <http://xmlns.com/foaf/0.1/Agent> ;
+                                                       rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                       rdfs:comment "Asocia un agente con recursos legales relevantes para su actividad o que se encuentran dentro de su ámbito de actuación."@es ,
+                                                                    "Associates an agent with legal resources that are relevant to its activity or within its scope of action."@en ;
+                                                       rdfs:label "associated legal resource"@en ,
+                                                                  "norma asociada"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/passes_norm
+<http://maia.madrid.es/ontologies/def/passes_norm> rdf:type owl:ObjectProperty .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#associated_norm
+:associated_norm rdf:type owl:ObjectProperty .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#hasMembership
+:hasMembership rdf:type owl:ObjectProperty ;
+               rdfs:domain :Person ;
+               rdfs:range <http://www.w3.org/ns/org#Membership> ;
+               rdfs:comment "Links a person to their membership in a public office within an organization."@en ,
+                            "Vincula una persona con su membresía en un cargo público dentro de una organización."@es ;
+               rdfs:label "has membership"@en ,
+                          "tiene membresía"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#implements_competence
+:implements_competence rdf:type owl:ObjectProperty ;
+                       rdfs:domain :LegalResource ;
+                       rdfs:range :LegalCompetencePath ;
+                       rdfs:comment "Asocia un recurso legal con las competencias que implementa."@es ,
+                                    "Links a legal resource with the authorities it implements."@en ;
+                       rdfs:label "implementa competencia"@es ,
+                                  "implements authority"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#isAboutNode
+:isAboutNode rdf:type owl:ObjectProperty ;
+             rdfs:domain :IsAboutPath ;
+             rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+             rdfs:comment "Links a subject matter path to a specific SKOS concept node that represents a subject in the hierarchy."@en ,
+                          "Vincula una ruta de materias con un nodo de concepto SKOS específico que representa una materia en la jerarquía."@es ;
+             rdfs:label "is about node"@en ,
+                        "nodo materias"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#legalCompetenceNode
+:legalCompetenceNode rdf:type owl:ObjectProperty ;
+                     rdfs:domain :LegalCompetencePath ;
+                     rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                     rdfs:comment "Links an authority path to a specific SKOS concept node that represents an authority in the hierarchy."@en ,
+                                  "Vincula una ruta de competencia con un nodo de concepto SKOS específico que representa una competencia en la jerarquía."@es ;
+                     rdfs:label "legal authority node"@en ,
+                                "nodo competencia legal"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#passed_by_organization
+:passed_by_organization rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf <http://data.europa.eu/eli/ontology#passed_by> ;
+                        rdfs:domain :LegalResource ;
+                        rdfs:range <http://www.w3.org/ns/org#Organization> ;
+                        rdfs:comment "Indica que un recurso legal ha sido aprobado por una organización."@es ,
+                                     "Indicates that a legal resource has been passed by an organization."@en ;
+                        rdfs:label "aprobado por organización"@es ,
+                                   "passed by organization"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#passed_by_person
+:passed_by_person rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://data.europa.eu/eli/ontology#passed_by> ;
+                  rdfs:domain :LegalResource ;
+                  rdfs:range <http://xmlns.com/foaf/0.1/Agent> ;
+                  rdfs:comment "Indica que un recurso legal ha sido aprobado por una persona o agente."@es ,
+                               "Indicates that a legal resource has been passed by a person or agent."@en ;
+                  rdfs:label "aprobado por persona"@es ,
+                             "passed by person"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#passes_norm
+:passes_norm rdf:type owl:ObjectProperty ;
+             owl:inverseOf <http://data.europa.eu/eli/ontology#passed_by> ;
+             rdfs:domain <http://xmlns.com/foaf/0.1/Agent> ;
+             rdfs:range <http://data.europa.eu/eli/ontology#LegalResource> ;
+             rdfs:comment "Indica que un agente (por ejemplo, un órgano colegiado) aprueba formalmente un recurso legal."@es ,
+                          "Indicates that an agent (e.g. a collegiate body) formally passes or adopts a legal resource."@en ;
+             rdfs:label "aprueba norma"@es ,
+                        "passes legal resource"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#refers_to_organization
+:refers_to_organization rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf <http://data.europa.eu/eli/ontology#refers_to> ;
+                        rdfs:domain :LegalResource ;
+                        rdfs:range <http://xmlns.com/foaf/0.1/Agent> ;
+                        rdfs:comment "Indica que un recurso legal hace referencia a una organización específica."@es ,
+                                     "Indicates that a legal resource refers to a specific organization."@en ;
+                        rdfs:label "refers to organization"@en ,
+                                   "se refiere a organización"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#refers_to_person
+:refers_to_person rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://data.europa.eu/eli/ontology#refers_to> ;
+                  rdfs:domain :LegalResource ;
+                  rdfs:range <http://xmlns.com/foaf/0.1/Agent> ;
+                  rdfs:comment "Indica que un recurso legal hace referencia a una persona o agente específico."@es ,
+                               "Indicates that a legal resource refers to a specific person or agent."@en ;
+                  rdfs:label "refers to person"@en ,
+                             "se refiere a persona"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#relevantEvent
+:relevantEvent rdf:type owl:ObjectProperty ;
+               rdfs:domain :LegalResourceSubsivision ;
+               rdfs:range <http://schema.org/Event> ;
+               rdfs:comment "Relaciona un recurso legal o una subdivisión con eventos (temporales, fiestas, obras, emergencias, etc.) mencionados en el texto y relevantes para su aplicabilidad."@es ,
+                            "Relates a legal resource or subdivision with events (storms, festivities, works, emergencies, etc.) mentioned in the text and relevant for its applicability."@en ;
+               rdfs:label "evento relevante"@es ,
+                          "relevant event"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#temaNode
+:temaNode rdf:type owl:ObjectProperty ;
+          rdfs:domain :TopicPath ;
+          rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+          rdfs:comment "Links a topic path to a specific SKOS concept node that represents a topic in the hierarchy."@en ,
+                       "Vincula una ruta de tema con un nodo de concepto SKOS específico que representa un tema en la jerarquía."@es ;
+          rdfs:label "nodo tema"@es ,
+                     "topic node"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#topic
+:topic rdf:type owl:ObjectProperty ;
+       rdfs:domain :LegalResource ;
+       rdfs:range :TopicPath ;
+       rdfs:comment "Asocia un recurso legal con conceptos temáticos."@es ,
+                    "Associates a legal resource with topic concepts."@en ;
+       rdfs:label "tema"@es ,
+                  "topic"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#typeDocumentNode
+:typeDocumentNode rdf:type owl:ObjectProperty ;
+                  rdfs:domain :TypeDocumentPath ;
+                  rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                  rdfs:comment "Links a document type path to a specific SKOS concept node that represents a document type in the hierarchy."@en ,
+                               "Vincula una ruta de tipo documental con un nodo de concepto SKOS específico que representa un tipo documental en la jerarquía."@es ;
+                  rdfs:label "nodo tipo documental"@es ,
+                             "type document node"@en .
+
+
+###  http://www.w3.org/2006/time#hasTime
+<http://www.w3.org/2006/time#hasTime> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://schema.org/Event> ;
+                                      rdfs:range <http://www.w3.org/2006/time#Interval> ;
+                                      rdfs:comment "Has time"@en ,
+                                                   "Tiene tiempo"@es ;
+                                      rdfs:label "has time"@en ,
+                                                 "tiene tiempo"@es .
+
+
+###  http://www.w3.org/2008/05/skos#broader
+<http://www.w3.org/2008/05/skos#broader> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <http://www.w3.org/2008/05/skos#Concept> ;
+                                         rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                                         rdfs:comment "Property broader from external vocabulary"@en ,
+                                                      "Propiedad broader de vocabulario externo"@es ;
+                                         rdfs:label "broader (SKOS)"@en ,
+                                                    "más amplio (SKOS)"@es .
+
+
+###  http://www.w3.org/2008/05/skos#member
+<http://www.w3.org/2008/05/skos#member> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://www.w3.org/2008/05/skos#Collection> ;
+                                        rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                                        rdfs:comment "Member"@en ,
+                                                     "Miembro"@es ;
+                                        rdfs:label "member (SKOS)"@en ,
+                                                   "miembro (SKOS)"@es .
+
+
+###  http://www.w3.org/2008/05/skos#narrower
+<http://www.w3.org/2008/05/skos#narrower> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <http://www.w3.org/2008/05/skos#Concept> ;
+                                          rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                                          rdfs:comment "Property narrower from external vocabulary"@en ,
+                                                       "Propiedad narrower de vocabulario externo"@es ;
+                                          rdfs:label "más específico (SKOS)"@es ,
+                                                     "narrower (SKOS)"@en .
+
+
+###  http://www.w3.org/ns/org#hasSubOrganization
+<http://www.w3.org/ns/org#hasSubOrganization> rdf:type owl:ObjectProperty ;
+                                              owl:inverseOf <http://www.w3.org/ns/org#subOrganizationOf> ;
+                                              rdfs:domain <http://www.w3.org/ns/org#Organization> ;
+                                              rdfs:range <http://www.w3.org/ns/org#Organization> ;
+                                              rdfs:comment "Has sub-organization"@en ,
+                                                           "Tiene suborganización"@es ;
+                                              rdfs:label "has sub-organization"@en ,
+                                                         "tiene suborganización"@es .
+
+
+###  http://www.w3.org/ns/org#memberDuring
+<http://www.w3.org/ns/org#memberDuring> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://www.w3.org/ns/org#Membership> ;
+                                        rdfs:range <http://www.w3.org/2006/time#Interval> ;
+                                        rdfs:comment "Member during"@en ,
+                                                     "Miembro durante"@es ;
+                                        rdfs:label "member during"@en ,
+                                                   "miembro durante"@es .
+
+
+###  http://www.w3.org/ns/org#organization
+<http://www.w3.org/ns/org#organization> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://www.w3.org/ns/org#Membership> ;
+                                        rdfs:range <http://www.w3.org/ns/org#Organization> ;
+                                        rdfs:comment "Organización"@es ,
+                                                     "Organization"@en ;
+                                        rdfs:label "organización"@es ,
+                                                   "organization"@en .
+
+
+###  http://www.w3.org/ns/org#role
+<http://www.w3.org/ns/org#role> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://www.w3.org/ns/org#Membership> ;
+                                rdfs:range <http://www.w3.org/ns/org#Role> ;
+                                rdfs:comment "Rol"@es ,
+                                             "Role"@en ;
+                                rdfs:label "rol"@es ,
+                                           "role"@en .
+
+
+###  http://www.w3.org/ns/org#subOrganizationOf
+<http://www.w3.org/ns/org#subOrganizationOf> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://www.w3.org/ns/org#Organization> ;
+                                             rdfs:range <http://www.w3.org/ns/org#Organization> ;
+                                             rdfs:comment "Sub-organization of"@en ,
+                                                          "Suborganización de"@es ;
+                                             rdfs:label "sub-organization of"@en ,
+                                                        "suborganización de"@es .
+
+
+###  https://www.geonames.org/ontology#featureClass
+<https://www.geonames.org/ontology#featureClass> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <https://www.geonames.org/ontology#Feature> ;
+                                                 rdfs:range <http://www.w3.org/2008/05/skos#Concept> ;
+                                                 rdfs:comment "Clase de entidad"@es ,
+                                                              "Feature class"@en ;
+                                                 rdfs:label "clase de entidad"@es ,
+                                                            "feature class"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://data.europa.eu/eli/ontology#cited_by_case_law_reference
+<http://data.europa.eu/eli/ontology#cited_by_case_law_reference> rdf:type owl:DatatypeProperty ;
+                                                                 rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                                 rdfs:range xsd:string ;
+                                                                 rdfs:comment "Property cited_by_case_law_reference from external vocabulary"@en ,
+                                                                              "Propiedad cited_by_case_law_reference de vocabulario externo"@es ;
+                                                                 rdfs:label "Jurisprudencia"@es ,
+                                                                            "cited by case law reference (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#date_applicability
+<http://data.europa.eu/eli/ontology#date_applicability> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                        rdfs:range xsd:date ;
+                                                        rdfs:comment "Date of applicability"@en ,
+                                                                     "Fecha de aplicabilidad"@es ;
+                                                        rdfs:label "date applicability (ELI)"@en ,
+                                                                   "fecha de aplicabilidad (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#date_document
+<http://data.europa.eu/eli/ontology#date_document> rdf:type owl:DatatypeProperty ;
+                                                   rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                   rdfs:range xsd:date ;
+                                                   rdfs:comment "Property date_document from external vocabulary"@en ,
+                                                                "Propiedad date_document de vocabulario externo"@es ;
+                                                   rdfs:label "Fecha disposición"@es ,
+                                                              "date document (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#date_no_longer_in_force
+<http://data.europa.eu/eli/ontology#date_no_longer_in_force> rdf:type owl:DatatypeProperty ;
+                                                             rdfs:domain [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                                         <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                                       )
+                                                                         ] ;
+                                                             rdfs:range xsd:date ;
+                                                             rdfs:comment "Property date_no_longer_in_force from external vocabulary"@en ,
+                                                                          "Propiedad date_no_longer_in_force de vocabulario externo"@es ;
+                                                             rdfs:label "Date no longer in force (ELI)"@en ,
+                                                                        "Fecha de pérdida de vigencia"@es .
+
+
+###  http://data.europa.eu/eli/ontology#date_publication
+<http://data.europa.eu/eli/ontology#date_publication> rdf:type owl:DatatypeProperty ;
+                                                      rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                      rdfs:range xsd:date ;
+                                                      rdfs:comment "Property date_publication from external vocabulary"@en ,
+                                                                   "Propiedad date_publication de vocabulario externo"@es ;
+                                                      rdfs:label "Fecha de publicación (BOAM)"@es ,
+                                                                 "date publication (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#description
+<http://data.europa.eu/eli/ontology#description> rdf:type owl:DatatypeProperty ;
+                                                 rdfs:domain [ rdf:type owl:Class ;
+                                                               owl:unionOf ( <http://data.europa.eu/eli/ontology#LegalExpression>
+                                                                             <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                             <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                           )
+                                                             ] ;
+                                                 rdfs:range xsd:string ;
+                                                 rdfs:comment "Property description from external vocabulary"@en ,
+                                                              "Propiedad description de vocabulario externo"@es ;
+                                                 rdfs:label "Resumen/Descripción"@es ,
+                                                            "description (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#first_date_entry_in_force
+<http://data.europa.eu/eli/ontology#first_date_entry_in_force> rdf:type owl:DatatypeProperty ;
+                                                               rdfs:domain <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                                                               rdfs:range xsd:date ;
+                                                               rdfs:comment "First date entry in force"@en ,
+                                                                            "Primera fecha de entrada en vigor"@es ;
+                                                               rdfs:label "first date entry in force (ELI)"@en ,
+                                                                          "primera fecha de entrada en vigor (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#format
+<http://data.europa.eu/eli/ontology#format> rdf:type owl:DatatypeProperty ;
+                                            rdfs:domain <http://data.europa.eu/eli/ontology#Format> ;
+                                            rdfs:range xsd:string ;
+                                            rdfs:comment "Format"@en ,
+                                                         "Formato"@es ;
+                                            rdfs:label "format (ELI)"@en ,
+                                                       "formato (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#number
+<http://data.europa.eu/eli/ontology#number> rdf:type owl:DatatypeProperty ;
+                                            rdfs:domain [ rdf:type owl:Class ;
+                                                          owl:unionOf ( <http://data.europa.eu/eli/ontology#Format>
+                                                                        <http://data.europa.eu/eli/ontology#LegalExpression>
+                                                                        <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                        <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                      )
+                                                        ] ;
+                                            rdfs:range xsd:string ;
+                                            rdfs:comment "Property number from external vocabulary"@en ,
+                                                         "Propiedad number de vocabulario externo"@es ;
+                                            rdfs:label "Identificador local/URL"@es ,
+                                                       "number (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#published_in
+<http://data.europa.eu/eli/ontology#published_in> rdf:type owl:DatatypeProperty ;
+                                                  rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                  rdfs:range xsd:string ;
+                                                  rdfs:comment "Property published_in from external vocabulary"@en ,
+                                                               "Propiedad published_in de vocabulario externo"@es ;
+                                                  rdfs:label "Publicacion"@es ,
+                                                             "published in (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#title
+<http://data.europa.eu/eli/ontology#title> rdf:type owl:DatatypeProperty ;
+                                           rdfs:domain [ rdf:type owl:Class ;
+                                                         owl:unionOf ( <http://data.europa.eu/eli/ontology#LegalExpression>
+                                                                       <http://data.europa.eu/eli/ontology#LegalResource>
+                                                                       <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                                                                     )
+                                                       ] ;
+                                           rdfs:range xsd:string ;
+                                           rdfs:comment "Property title from external vocabulary"@en ,
+                                                        "Propiedad title de vocabulario externo"@es ;
+                                           rdfs:label "Título oficial de la disposición"@es ,
+                                                      "title (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#uri_schema
+<http://data.europa.eu/eli/ontology#uri_schema> rdf:type owl:DatatypeProperty ;
+                                                rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                rdfs:range xsd:string ;
+                                                rdfs:comment "Property uri_schema from external vocabulary"@en ,
+                                                             "Propiedad uri_schema de vocabulario externo"@es ;
+                                                rdfs:label "Permalink"@es ,
+                                                           "uri schema (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#versionDate
+<http://data.europa.eu/eli/ontology#versionDate> rdf:type owl:DatatypeProperty ;
+                                                 rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                 rdfs:range xsd:date ;
+                                                 rdfs:comment "Fecha de versión"@es ,
+                                                              "Version date"@en ;
+                                                 rdfs:label "fecha de versión (ELI)"@es ,
+                                                            "version date (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#version_date
+<http://data.europa.eu/eli/ontology#version_date> rdf:type owl:DatatypeProperty ;
+                                                  rdfs:domain <http://data.europa.eu/eli/ontology#LegalResource> ;
+                                                  rdfs:range xsd:date ;
+                                                  rdfs:comment "Property version_date from external vocabulary"@en ,
+                                                               "Propiedad version_date de vocabulario externo"@es ;
+                                                  rdfs:label "Fecha version"@es ,
+                                                             "version date (ELI)"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#amends
+:amends rdf:type owl:DatatypeProperty ;
+        rdfs:domain :LegalResource ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Descriptive text indicating the amendments made by a legal resource to another."@en ,
+                     "Texto descriptivo que indica las enmiendas realizadas por un recurso legal a otro."@es ;
+        rdfs:label "amends"@en ,
+                   "enmienda"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#changes
+:changes rdf:type owl:DatatypeProperty ;
+         rdfs:domain :LegalResource ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Descriptive text indicating the modifications made by a legal resource to another."@en ,
+                      "Texto descriptivo que indica las modificaciones realizadas por un recurso legal a otro."@es ;
+         rdfs:label "changes"@en ,
+                    "modifica"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#infoPersonRol
+:infoPersonRol rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Membership ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Additional information about the role or function of a person in a membership relationship."@en ,
+                            "Información adicional sobre el rol o función de una persona en una relación de membresía."@es ;
+               rdfs:label "información del rol de persona"@es ,
+                          "person role information"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#isVersionOfReference
+:isVersionOfReference rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :LegalResource ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "Identificador de referencia que vincula una versión con su recurso base."@es ,
+                                   "Reference identifier linking a version to its base resource."@en ;
+                      rdfs:label "es versión de referencia"@es ,
+                                 "is version of reference"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#number
+:number rdf:type owl:DatatypeProperty ;
+        rdfs:domain :LegalValue ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Identificador numérico o número secuencial asignado a un valor legal."@es ,
+                     "Numerical identifier or sequential number assigned to a legal value."@en ,
+                     "Número secuencial o identificador."@es ,
+                     "Sequential or identifying number."@en ;
+        rdfs:label "number"@en ,
+                   "número"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#physicalLegalDocument
+:physicalLegalDocument rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Format ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Localizador (por ejemplo una URL) de un documento físico o electrónico que materializa un formato legal concreto (PDF, HTML, etc.)."@es ,
+                                    "Locator (for example a URL) of a physical or electronic document that materialises a specific legal format (PDF, HTML, etc.)."@en ;
+                       rdfs:label "URL al documento legal"@es ,
+                                  "URL of the physical/legal document"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#repeals
+:repeals rdf:type owl:DatatypeProperty ;
+         rdfs:domain :LegalResource ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Descriptive text indicating the repeals made by a legal resource to another."@en ,
+                      "Texto descriptivo que indica las derogaciones realizadas por un recurso legal a otro."@es ;
+         rdfs:label "deroga"@es ,
+                    "repeals"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:domain :LegalValue ;
+       rdfs:range xsd:string ;
+       rdfs:comment "Descriptive title or heading of a legal value."@en ,
+                    "Title or heading."@en ,
+                    "Título descriptivo o encabezado de un valor legal."@es ,
+                    "Título o encabezado."@es ;
+       rdfs:label "title"@en ,
+                  "título"@es .
+
+
+###  http://purl.org/dc/elements/1.1/description
+<http://purl.org/dc/elements/1.1/description> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain :Feature ;
+                                              rdfs:range xsd:string ;
+                                              rdfs:comment "Descripción"@es ,
+                                                           "Description"@en ;
+                                              rdfs:label "descripción (DC)"@es ,
+                                                         "description (DC)"@en .
+
+
+###  http://purl.org/dc/elements/1.1/identifier
+<http://purl.org/dc/elements/1.1/identifier> rdf:type owl:DatatypeProperty ;
+                                             rdfs:domain [ rdf:type owl:Class ;
+                                                           owl:unionOf ( :Feature
+                                                                         <http://www.w3.org/2008/05/skos#Concept>
+                                                                       )
+                                                         ] ;
+                                             rdfs:range xsd:string ;
+                                             rdfs:comment "Identificador"@es ,
+                                                          "Identifier"@en ;
+                                             rdfs:label "identificador (DC)"@es ,
+                                                        "identifier (DC)"@en .
+
+
+###  http://purl.org/dc/elements/1.1/source
+<http://purl.org/dc/elements/1.1/source> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <http://www.w3.org/2008/05/skos#Collection>
+                                                                     <http://www.w3.org/2008/05/skos#Concept>
+                                                                   )
+                                                     ] ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:comment "Fuente"@es ,
+                                                      "Source"@en ;
+                                         rdfs:label "fuente (DC)"@es ,
+                                                    "source (DC)"@en .
+
+
+###  http://schema.org/description
+<http://schema.org/description> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain <http://schema.org/Event> ;
+                                rdfs:range xsd:string ;
+                                rdfs:comment "A description of the item."@es ,
+                                             "Una descripción del artículo."@en ;
+                                rdfs:label "Description"@en ,
+                                           "descripción"@es .
+
+
+###  http://schema.org/name
+<http://schema.org/name> rdf:type owl:DatatypeProperty ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( <http://schema.org/Event>
+                                                     <http://www.w3.org/ns/org#Role>
+                                                     <http://xmlns.com/foaf/0.1/Agent>
+                                                   )
+                                     ] .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+<http://www.w3.org/2003/01/geo/wgs84_pos#lat> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <https://www.geonames.org/ontology#Feature> ;
+                                              rdfs:range xsd:float ;
+                                              rdfs:comment "Latitud"@es ,
+                                                           "Latitude"@en ;
+                                              rdfs:label "latitud"@es ,
+                                                         "latitude"@en .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+<http://www.w3.org/2003/01/geo/wgs84_pos#long> rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain <https://www.geonames.org/ontology#Feature> ;
+                                               rdfs:range xsd:float ;
+                                               rdfs:comment "Longitud"@es ,
+                                                            "Longitude"@en ;
+                                               rdfs:label "longitud"@es ,
+                                                          "longitude"@en .
+
+
+###  http://www.w3.org/2006/time#hasBeginning
+<http://www.w3.org/2006/time#hasBeginning> rdf:type owl:DatatypeProperty ;
+                                           rdfs:domain <http://www.w3.org/2006/time#Interval> ;
+                                           rdfs:range xsd:date ;
+                                           rdfs:comment "Has beginning"@en ,
+                                                        "Tiene inicio"@es ;
+                                           rdfs:label "has beginning"@en ,
+                                                      "tiene inicio"@es .
+
+
+###  http://www.w3.org/2006/time#hasEnd
+<http://www.w3.org/2006/time#hasEnd> rdf:type owl:DatatypeProperty ;
+                                     rdfs:domain <http://www.w3.org/2006/time#Interval> ;
+                                     rdfs:range xsd:date ;
+                                     rdfs:comment "Has end"@en ,
+                                                  "Tiene fin"@es ;
+                                     rdfs:label "has end"@en ,
+                                                "tiene fin"@es .
+
+
+###  http://www.w3.org/2008/05/skos#altLabel
+<http://www.w3.org/2008/05/skos#altLabel> rdf:type owl:DatatypeProperty ;
+                                          rdfs:domain <http://xmlns.com/foaf/0.1/Agent> ;
+                                          rdfs:range xsd:string ;
+                                          rdfs:comment "Property altLabel from external vocabulary"@en ,
+                                                       "Propiedad altLabel de vocabulario externo"@es ;
+                                          rdfs:label "alternative label"@en ,
+                                                     "etiqueta alternativa"@es .
+
+
+###  http://www.w3.org/2008/05/skos#note
+<http://www.w3.org/2008/05/skos#note> rdf:type owl:DatatypeProperty ;
+                                      rdfs:domain <http://www.w3.org/2008/05/skos#Concept> ;
+                                      rdfs:range xsd:string ;
+                                      rdfs:comment "Nota"@es ,
+                                                   "Note"@en ;
+                                      rdfs:label "nota (SKOS)"@es ,
+                                                 "note (SKOS)"@en .
+
+
+###  http://www.w3.org/2008/05/skos#prefLabel
+<http://www.w3.org/2008/05/skos#prefLabel> rdf:type owl:DatatypeProperty ;
+                                           rdfs:domain [ rdf:type owl:Class ;
+                                                         owl:unionOf ( <http://www.w3.org/2008/05/skos#Concept>
+                                                                       <http://xmlns.com/foaf/0.1/Agent>
+                                                                     )
+                                                       ] ;
+                                           rdfs:range xsd:string ;
+                                           rdfs:comment "Etiqueta preferida"@es ,
+                                                        "Preferred label"@en ;
+                                           rdfs:label "etiqueta preferida (SKOS)"@es ,
+                                                      "preferred label (SKOS)"@en .
+
+
+###  http://www.w3.org/2008/05/skos#scopeNote
+<http://www.w3.org/2008/05/skos#scopeNote> rdf:type owl:DatatypeProperty ;
+                                           rdfs:domain <http://www.w3.org/2008/05/skos#Collection> ;
+                                           rdfs:range xsd:string ;
+                                           rdfs:comment "Nota de alcance"@es ,
+                                                        "Scope note"@en ;
+                                           rdfs:label "nota de alcance (SKOS)"@es ,
+                                                      "scope note (SKOS)"@en .
+
+
+###  http://www.w3.org/2008/05/skos#symbol
+<http://www.w3.org/2008/05/skos#symbol> rdf:type owl:DatatypeProperty ;
+                                        rdfs:domain <http://www.w3.org/2008/05/skos#Concept> ;
+                                        rdfs:range xsd:string ;
+                                        rdfs:comment "Symbol"@en ,
+                                                     "Símbolo"@es ;
+                                        rdfs:label "symbol (SKOS)"@en ,
+                                                   "símbolo (SKOS)"@es .
+
+
+###  https://www.geonames.org/ontology#alternateName
+<https://www.geonames.org/ontology#alternateName> rdf:type owl:DatatypeProperty ;
+                                                  rdfs:domain <https://www.geonames.org/ontology#Feature> ;
+                                                  rdfs:range xsd:string ;
+                                                  rdfs:comment "Alternate name"@en ,
+                                                               "Nombre alternativo"@es ;
+                                                  rdfs:label "alternate name"@en ,
+                                                             "nombre alternativo"@es .
+
+
+###  https://www.geonames.org/ontology#geonameId
+<https://www.geonames.org/ontology#geonameId> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <https://www.geonames.org/ontology#Feature> ;
+                                              rdfs:range xsd:string ;
+                                              rdfs:comment "Geoname ID"@en ,
+                                                           "ID de geoname"@es ;
+                                              rdfs:label "ID de geoname"@es ,
+                                                         "geoname ID"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://data.europa.eu/eli/ontology#Format
+<http://data.europa.eu/eli/ontology#Format> rdf:type owl:Class ;
+                                            rdfs:subClassOf owl:Thing ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://data.europa.eu/eli/ontology#format> ;
+                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                            ] ;
+                                            rdfs:comment "A format of a legal expression, such as PDF, HTML, or printed document."@en ,
+                                                         "Un formato de una expresión legal, como PDF, HTML o documento impreso."@es ;
+                                            rdfs:label "Format (ELI)"@en ,
+                                                       "Formato (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#LegalExpression
+<http://data.europa.eu/eli/ontology#LegalExpression> rdf:type owl:Class ;
+                                                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <http://data.europa.eu/eli/ontology#legal_value> ;
+                                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                     ] ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <http://data.europa.eu/eli/ontology#realizes> ;
+                                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                     ] ;
+                                                     rdfs:comment "A specific linguistic expression of a legal resource, representing the text in a particular language."@en ,
+                                                                  "Una expresión lingüística específica de un recurso legal, que representa el texto en un idioma particular."@es ;
+                                                     rdfs:label "Expresión Legal (ELI)"@es ,
+                                                                "Legal Expression (ELI)"@en .
+
+
+###  http://data.europa.eu/eli/ontology#LegalResource
+<http://data.europa.eu/eli/ontology#LegalResource> rdf:type owl:Class ;
+                                                   rdfs:subClassOf owl:Thing ,
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty <http://data.europa.eu/eli/ontology#number> ;
+                                                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                   ] ;
+                                                   rdfs:comment "A work, in the sense of FRBR, corresponding to the abstract concept of a legal resource."@en ,
+                                                                "Una obra, en el sentido de FRBR, que corresponde al concepto abstracto de un recurso legal."@es ;
+                                                   rdfs:label "Legal Resource (ELI)"@en ,
+                                                              "Recurso Legal (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#LegalResourceSubdivision
+<http://data.europa.eu/eli/ontology#LegalResourceSubdivision> rdf:type owl:Class ;
+                                                              rdfs:subClassOf owl:Thing ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty <http://data.europa.eu/eli/ontology#date_applicability> ;
+                                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                              ] ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty <http://data.europa.eu/eli/ontology#date_no_longer_in_force> ;
+                                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                              ] ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty <http://data.europa.eu/eli/ontology#first_date_entry_in_force> ;
+                                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                              ] ;
+                                                              rdfs:comment "A subdivision of a legal resource, such as an article, chapter, or section."@en ,
+                                                                           "Una subdivisión de un recurso legal, como un artículo, capítulo o sección."@es ;
+                                                              rdfs:label "Legal Resource Subdivision (ELI)"@en ,
+                                                                         "Subdivisión de Recurso Legal (ELI)"@es .
+
+
+###  http://data.europa.eu/eli/ontology#ResourceType
+<http://data.europa.eu/eli/ontology#ResourceType> rdf:type owl:Class .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#Feature
+:Feature rdf:type owl:Class ;
+         rdfs:subClassOf <https://www.geonames.org/ontology#Feature> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.org/dc/elements/1.1/identifier> ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.org/dc/elements/1.1/description> ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://www.w3.org/2003/01/geo/wgs84_pos#long> ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <https://www.geonames.org/ontology#geonameId> ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ;
+         rdfs:comment "Entidad geográfica o ubicación con coordenadas e identificación, que representa un lugar en una localidad."@es ,
+                      "Geographical entity or location with coordinates and identification, typically representing a place in a locality."@en ;
+         rdfs:label "Entidad geográfica"@es ,
+                    "Feature"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#Format
+:Format rdf:type owl:Class ;
+        rdfs:subClassOf <http://data.europa.eu/eli/ontology#Format> ;
+        rdfs:comment "Formato físico o electrónico de un recurso legal (PDF, HTML, etc.)."@es ,
+                     "Physical or electronic format of a legal resource (PDF, HTML, etc.)."@en ;
+        rdfs:label "Format"@en ,
+                   "Formato"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#IsAboutPath
+:IsAboutPath rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.w3.org/2008/05/skos#Concept> ;
+             rdfs:comment "Hierarchical classification path for subject matters that legal resources address."@en ,
+                          "Ruta de clasificación jerárquica para las materias que abordan los recursos legales."@es ;
+             rdfs:label "Is About Path"@en ,
+                        "Ruta de Materias"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#LegalCompetencePath
+:LegalCompetencePath rdf:type owl:Class ;
+                     rdfs:comment "Hierarchical path or sequence that represents the delegation or assignment of authorities within the public administration structure."@en ,
+                                  "Ruta jerárquica o secuencia que representa la delegación o asignación de competencias dentro de la estructura de la administración pública."@es ;
+                     rdfs:label "Legal Authority Path"@en ,
+                                "Ruta de Competencia Legal"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#LegalResource
+:LegalResource rdf:type owl:Class ;
+               rdfs:subClassOf <http://data.europa.eu/eli/ontology#LegalResource> ;
+               rdfs:comment "Extension of ELI LegalResource for specific needs of local legal framework."@en ,
+                            "Extensión de ELI LegalResource para necesidades específicas del marco legal local."@es ;
+               rdfs:label "Extensión de Recurso Legal"@es ,
+                          "Legal Resource Extension"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#LegalResourceSubsivision
+:LegalResourceSubsivision rdf:type owl:Class ;
+                          rdfs:subClassOf <http://data.europa.eu/eli/ontology#LegalResourceSubdivision> ;
+                          rdfs:comment "Extension of ELI LegalResourceSubdivision for specific needs of local legal resources."@en ,
+                                       "Extensión de ELI LegalResourceSubdivision para necesidades específicas de recursos legales locales."@es ;
+                          rdfs:label "Extensión de Subdivisión de Recurso Legal"@es ,
+                                     "Legal Resource Subdivision Extension"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#LegalValue
+:LegalValue rdf:type owl:Class ;
+            rdfs:subClassOf owl:Thing ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :number ;
+                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :title ;
+                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                            ] ;
+            rdfs:comment "Specific value or status assigned within the legal framework, identified by a number and title."@en ,
+                         "Valor o estado específico asignado dentro del marco legal, identificado por un número y título."@es ;
+            rdfs:label "Legal Value"@en ,
+                       "Valor Legal"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#Membership
+:Membership rdf:type owl:Class ;
+            rdfs:subClassOf <http://www.w3.org/ns/org#Membership> ;
+            rdfs:comment "Extension of org:Membership for representing local public office assignments."@en ,
+                         "Extensión de org:Membership para representar asignaciones de cargos públicos locales."@es ;
+            rdfs:label "Membership"@en ,
+                       "Membresía"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#Organization
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf <http://www.w3.org/ns/org#Organization> ;
+              rdfs:comment "Organización involucrada en recursos legales (como aprobador, ejecutor, etc.)."@es ,
+                           "Organization involved in legal resources (as approver, executor, etc.)."@en ;
+              rdfs:label "Organización"@es ,
+                         "Organization"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf <http://xmlns.com/foaf/0.1/Person> ;
+        rdfs:comment "Natural person involved in legal resources (as author, approver, etc.)."@en ,
+                     "Persona física involucrada en recursos legales (como autor, aprobador, etc.)."@es ;
+        rdfs:label "Person"@en ,
+                   "Persona"@es .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#TopicPath
+:TopicPath rdf:type owl:Class ;
+           rdfs:comment "Hierarchical classification path that organizes topics or subject matters in a structured taxonomy."@en ,
+                        "Ruta de clasificación jerárquica que organiza temas o materias en una taxonomía estructurada."@es ;
+           rdfs:label "Ruta de Tema"@es ,
+                      "Topic Path"@en .
+
+
+###  http://maia.madrid.es/ontologies/def/local-regulations#TypeDocumentPath
+:TypeDocumentPath rdf:type owl:Class ;
+                  rdfs:subClassOf <http://data.europa.eu/eli/ontology#ResourceType> ,
+                                  owl:Thing ;
+                  rdfs:comment "Hierarchical classification path for document types in the legal domain."@en ,
+                               "Ruta de clasificación jerárquica para tipos documentales en el ámbito legal."@es ;
+                  rdfs:label "Ruta de Tipo Documental"@es ,
+                             "Type Document Path"@en .
+
+
+###  http://schema.org/Event
+<http://schema.org/Event> rdf:type owl:Class ;
+                          rdfs:comment "An event or occurrence related to legal processes or administrative actions."@en ,
+                                       "Un evento u ocurrencia relacionado con procesos legales o acciones administrativas."@es ;
+                          rdfs:label "Event"@en ,
+                                     "Evento"@es .
+
+
+###  http://www.w3.org/2006/time#Interval
+<http://www.w3.org/2006/time#Interval> rdf:type owl:Class ;
+                                       rdfs:subClassOf owl:Thing ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2006/time#hasBeginning> ;
+                                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2006/time#hasEnd> ;
+                                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                       ] ;
+                                       rdfs:comment "A temporal interval with a defined beginning and end, used to represent periods of validity or office terms."@en ,
+                                                    "Un intervalo temporal con un inicio y fin definidos, usado para representar periodos de vigencia o mandatos."@es ;
+                                       rdfs:label "Intervalo Temporal"@es ,
+                                                  "Time Interval"@en .
+
+
+###  http://www.w3.org/2008/05/skos#Collection
+<http://www.w3.org/2008/05/skos#Collection> rdf:type owl:Class ;
+                                            rdfs:subClassOf owl:Thing ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://purl.org/dc/elements/1.1/source> ;
+                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://www.w3.org/2008/05/skos#scopeNote> ;
+                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                            ] ;
+                                            rdfs:comment "A meaningful collection of concepts, used for grouping related concepts in a taxonomy."@en ,
+                                                         "Una colección significativa de conceptos, usada para agrupar conceptos relacionados en una taxonomía."@es ;
+                                            rdfs:label "Colección (SKOS)"@es ,
+                                                       "Collection (SKOS)"@en .
+
+
+###  http://www.w3.org/2008/05/skos#Concept
+<http://www.w3.org/2008/05/skos#Concept> rdf:type owl:Class ;
+                                         rdfs:subClassOf owl:Thing ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://www.w3.org/2008/05/skos#broader> ;
+                                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://www.w3.org/2008/05/skos#prefLabel> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://www.w3.org/2008/05/skos#symbol> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ;
+                                         rdfs:comment "An idea or notion; a unit of thought in a knowledge organization system."@en ,
+                                                      "Una idea o noción; una unidad de pensamiento en un sistema de organización del conocimiento."@es ;
+                                         rdfs:label "Concept (SKOS)"@en ,
+                                                    "Concepto (SKOS)"@es .
+
+
+###  http://www.w3.org/ns/org#Membership
+<http://www.w3.org/ns/org#Membership> rdf:type owl:Class ;
+                                      rdfs:comment "N-ary relation between a person, a public role and a public institution during a given term of office in a local government."@en ,
+                                                   "Relación n-aria entre una persona, un rol público y una institución pública durante un periodo de ejercicio de un cargo en un gobierno local."@es ;
+                                      rdfs:label "Cargo público"@es ,
+                                                 "Public office"@en .
+
+
+###  http://www.w3.org/ns/org#Organization
+<http://www.w3.org/ns/org#Organization> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://xmlns.com/foaf/0.1/Agent> ;
+                                        rdfs:comment "A collection of people organized together into a community or other social, commercial or political structure."@en ,
+                                                     "Un conjunto de personas organizadas en una comunidad u otra estructura social, comercial o política."@es ;
+                                        rdfs:label "Organización (W3C org)"@es ,
+                                                   "Organization (W3C org)"@en .
+
+
+###  http://www.w3.org/ns/org#Role
+<http://www.w3.org/ns/org#Role> rdf:type owl:Class ;
+                                rdfs:comment "A role that an agent can hold in an organization, representing a position or function within the organizational structure."@en ,
+                                             "Un rol que un agente puede desempeñar en una organización, representando una posición o función dentro de la estructura organizativa."@es ;
+                                rdfs:label "Rol (W3C org)"@es ,
+                                           "Role (W3C org)"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+<http://xmlns.com/foaf/0.1/Agent> rdf:type owl:Class ;
+                                  rdfs:comment "An agent (person, group, software or physical artifact) in the context of legal resources and organizational structures."@en ,
+                                               "Un agente (persona, grupo, software o artefacto físico) en el contexto de recursos legales y estructuras organizativas."@es ;
+                                  rdfs:label "Agent (FOAF)"@en ,
+                                             "Agente (FOAF)"@es .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://xmlns.com/foaf/0.1/Agent> ;
+                                   rdfs:comment "A person, representing an individual human being in the context of legal resources and public administration."@en ,
+                                                "Una persona, que representa un individuo humano en el contexto de recursos legales y administración pública."@es ;
+                                   rdfs:label "Person (ELI)"@en ,
+                                              "Persona (FOAF)"@es .
+
+
+###  https://www.geonames.org/ontology#Feature
+<https://www.geonames.org/ontology#Feature> rdf:type owl:Class ;
+                                            rdfs:comment "A geographical feature from the GeoNames ontology, representing a location or place."@en ,
+                                                         "Una entidad geográfica de la ontología GeoNames, que representa una ubicación o lugar."@es ;
+                                            rdfs:label "Entidad (GeoNames)"@es ,
+                                                       "Feature (GeoNames)"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://schema.org/name> rdfs:comment "Name of an entity"@en ,
+                                      "Nombre de una entidad"@es ;
+                         rdfs:label "name (Schema.org)"@en ,
+                                    "nombre (Schema.org)"@es .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://data.europa.eu/eli/ontology#LegalExpression>
+                <http://data.europa.eu/eli/ontology#LegalResource>
+                <http://data.europa.eu/eli/ontology#LegalResourceSubdivision>
+                :Feature
+                :Format
+                :LegalCompetencePath
+                :LegalValue
+                :Organization
+                :TopicPath
+                <http://schema.org/Event>
+                <http://www.w3.org/ns/org#Membership>
+              )
+] .
+
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/

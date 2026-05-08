@@ -1,0 +1,128 @@
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb2:    <http://jena.apache.org/2016/tdb#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix text:    <http://jena.apache.org/text#> .
+
+# ==============================================================================
+# LoRO Dataset - Normativa Legal del Ayuntamiento de Madrid
+# ==============================================================================
+#
+# Configuracion del dataset TDB2 para Apache Jena Fuseki (standalone),
+# envuelto en text:TextDataset para busqueda full-text con Lucene.
+# Vocabularios: LoRO (Local Regulation Ontology) + ELI (European Legislation Identifier)
+#
+# Grafos nombrados:
+#   http://maia.madrid.es/ontologies/loro/legal-resource
+#   http://maia.madrid.es/ontologies/loro/legal-resource-subdivision
+#   http://maia.madrid.es/ontologies/loro/organization
+#   http://maia.madrid.es/ontologies/loro/person
+#   http://maia.madrid.es/ontologies/loro/event
+#   http://maia.madrid.es/ontologies/loro/role
+#   http://maia.madrid.es/ontologies/loro/feature
+#   http://maia.madrid.es/ontologies/loro/taxonomy
+#   http://maia.madrid.es/ontologies/loro/legal-value
+#   http://maia.madrid.es/ontologies/loro/ontology
+#
+# ==============================================================================
+
+# -- Dataset TDB2 (almacenamiento base) ----------------------------------------
+<#tdb_dataset_loro> rdf:type tdb2:DatasetTDB2 ;
+    tdb2:location "/fuseki/databases/loro" ;
+    tdb2:unionDefaultGraph true ;
+    rdfs:label "TDB2 LoRO - Normativa Legal Municipal" .
+
+# -- Indice Lucene de texto completo -------------------------------------------
+
+<#text_dataset> rdf:type text:TextDataset ;
+    text:dataset <#tdb_dataset_loro> ;
+    text:index   <#index_lucene> .
+
+# -- Custom analyzers and filters ------------------------------------------------
+
+# Accent-insensitive, no stemming (for entity names: titles, labels, place names)
+<#label_analyzer> a text:ConfigurableAnalyzer ;
+    text:tokenizer text:StandardTokenizer ;
+    text:filters (text:LowerCaseFilter text:ASCIIFoldingFilter) .
+
+# Spanish stopword filter
+<#stopFilter> a text:GenericFilter ;
+    text:class "org.apache.lucene.analysis.core.StopFilter" ;
+    text:params (
+        [ text:paramName "stopwords" ;
+          text:paramType text:TypeSet ;
+          text:paramValue ("de" "la" "las" "el" "los" "un" "una" "unos" "unas"
+                           "y" "o" "e" "ni" "que" "en" "a" "al" "del" "por"
+                           "para" "con" "sin" "sobre" "entre" "hasta" "desde"
+                           "se" "su" "sus" "lo" "le" "les" "nos" "es" "son"
+                           "ser" "como" "no" "si" "pero" "mas" "este" "esta"
+                           "estos" "estas" "ese" "esa" "esos" "esas" "otro"
+                           "otra" "otros" "otras" "todo" "toda" "todos" "todas") ]
+    ) .
+
+# Spanish light stemmer
+<#stemFilter> a text:GenericFilter ;
+    text:class "org.apache.lucene.analysis.es.SpanishLightStemFilter" .
+
+# Accent-insensitive + stopwords + stemming (for article body text)
+<#spanish_content_analyzer> a text:ConfigurableAnalyzer ;
+    text:tokenizer text:StandardTokenizer ;
+    text:filters (text:LowerCaseFilter text:ASCIIFoldingFilter <#stopFilter> <#stemFilter>) .
+
+# -- Lucene text index -----------------------------------------------------------
+
+<#index_lucene> rdf:type text:TextIndexLucene ;
+    text:directory <file:/fuseki/databases/loro-lucene> ;
+    text:entityMap <#entity_map> ;
+    text:storeValues true .
+
+<#entity_map> rdf:type text:EntityMap ;
+    text:defaultField "label" ;
+    text:entityField  "uri" ;
+    text:map (
+        [ text:field "title" ;
+          text:predicate <http://data.europa.eu/eli/ontology#title> ;
+          text:analyzer <#label_analyzer> ]
+        [ text:field "label" ;
+          text:predicate <http://www.w3.org/2008/05/skos#prefLabel> ;
+          text:analyzer <#label_analyzer> ]
+        [ text:field "name" ;
+          text:predicate <https://www.geonames.org/ontology#name> ;
+          text:analyzer <#label_analyzer> ]
+        [ text:field "description" ;
+          text:predicate <http://data.europa.eu/eli/ontology#description> ;
+          text:analyzer <#spanish_content_analyzer> ]
+    ) .
+
+# -- Servicio Fuseki -----------------------------------------------------------
+<#service_loro> rdf:type fuseki:Service ;
+    fuseki:name "loro" ;
+    rdfs:label "LoRO - Normativa del Ayuntamiento de Madrid" ;
+    fuseki:dataset <#text_dataset> ;
+
+    # Endpoints de consulta (lectura)
+    fuseki:endpoint [
+        fuseki:operation fuseki:query ;
+        fuseki:name "sparql"
+    ] ;
+    fuseki:endpoint [
+        fuseki:operation fuseki:query ;
+        fuseki:name "query"
+    ] ;
+
+    # Endpoints de actualizacion (escritura, requiere auth)
+    fuseki:endpoint [
+        fuseki:operation fuseki:update ;
+        fuseki:name "update"
+    ] ;
+
+    # Graph Store Protocol
+    fuseki:endpoint [
+        fuseki:operation fuseki:gsp-r ;
+        fuseki:name "get"
+    ] ;
+    fuseki:endpoint [
+        fuseki:operation fuseki:gsp-rw ;
+        fuseki:name "data"
+    ] .

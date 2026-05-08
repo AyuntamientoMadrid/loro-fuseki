@@ -1,0 +1,54 @@
+# loro-fuseki — local Apache Jena Fuseki with the LoRO Knowledge Graph
+#
+# Usage:
+#   ./scripts/fetch-data.sh        # download TTL files from Hugging Face
+#   docker compose up -d --build   # build and start
+#   docker compose logs fuseki     # follow logs
+#   docker compose down            # stop
+#   docker compose down -v         # stop and wipe the database
+#
+# After startup the Fuseki UI is available at http://localhost:3030
+# and the SPARQL endpoint at http://localhost:3030/loro/sparql
+
+services:
+  fuseki:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: loro-fuseki
+    ports:
+      - "${FUSEKI_LOCAL_PORT:-3030}:${PORT:-8080}"
+    environment:
+      # -- Server settings ----------------------------------------------------
+      PORT: ${PORT:-8080}
+      JVM_ARGS: ${JVM_ARGS:--Xmx4g -Xms1g}
+      FUSEKI_READONLY: ${FUSEKI_READONLY:-false}
+
+      # -- Authentication ----------------------------------------------------
+      # Admin password is required. The default below is suitable for local
+      # development; override via `.env` for any production-like deployment.
+      IACBX_ADMIN_PASSWORD: ${IACBX_ADMIN_PASSWORD:-admin}
+      IACBX_APP_PASSWORD: ${IACBX_APP_PASSWORD:-}
+      IACBX_READ_PASSWORD: ${IACBX_READ_PASSWORD:-}
+
+      # -- Auto-load TTL files from /staging on first start -----------------
+      LOAD_DATA_ON_START: ${LOAD_DATA_ON_START:-true}
+    volumes:
+      # TTL files downloaded by scripts/fetch-data.sh end up here. The folder
+      # is mounted read-only into the container at /staging.
+      - ./data/transformed:/staging:ro
+      # Database persistence (TDB2 + Lucene index across container restarts)
+      - fuseki-data:/fuseki/databases
+    mem_limit: 5g
+    mem_reservation: 1g
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${PORT:-8080}/$/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+volumes:
+  fuseki-data:
+    name: loro-fuseki-data

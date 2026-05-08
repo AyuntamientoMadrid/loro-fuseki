@@ -1,0 +1,45 @@
+# ============================================================================
+# .dockerignore — files NOT to ship in the Docker image
+# ============================================================================
+
+# Git metadata
+.git
+.gitignore
+
+# Local data — mounted as a volume, not baked into the image
+data/
+
+# docker-compose only used for local orchestration
+docker-compose.yml
+
+# Local helper scripts — not needed inside the image
+scripts/
+
+# Environment files — never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Markdown docs — only README.md is shipped (LICENSE is included)
+*.md
+!README.md
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI assistants' workspace state
+.claude/
+.cursor/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Python helpers (in case scripts/* are run with pip locally)
+__pycache__/
+*.pyc
+.venv/

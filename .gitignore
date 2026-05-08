@@ -1,0 +1,26 @@
+# Local data downloaded by ./scripts/fetch-data.sh
+data/
+
+# Local environment overrides
+.env
+.env.local
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI assistants' workspace state
+.claude/
+.cursor/
+
+# Python (in case you run scripts/* with pip locally)
+__pycache__/
+*.pyc
+.venv/
