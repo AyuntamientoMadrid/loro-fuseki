@@ -149,10 +149,18 @@ load_staging_data() {
     local auth_user="loro_admin"
     local auth_pass="${LORO_ADMIN_PASSWORD}"
 
-    if [ ! -d "${STAGING_DIR}" ] || [ -z "$(ls -A ${STAGING_DIR}/*.ttl 2>/dev/null)" ]; then
-        log_info "No TTL files found in ${STAGING_DIR}; skipping data load."
+    # The published HF dataset places TTLs under ttl/. Older snapshots had them
+    # at the root of /staging — keep that path as a fallback.
+    local ttl_dir
+    if [ -d "${STAGING_DIR}/ttl" ] && [ -n "$(ls -A ${STAGING_DIR}/ttl/*.ttl 2>/dev/null)" ]; then
+        ttl_dir="${STAGING_DIR}/ttl"
+    elif [ -d "${STAGING_DIR}" ] && [ -n "$(ls -A ${STAGING_DIR}/*.ttl 2>/dev/null)" ]; then
+        ttl_dir="${STAGING_DIR}"
+    else
+        log_info "No TTL files found in ${STAGING_DIR} (or ${STAGING_DIR}/ttl); skipping data load."
         return 0
     fi
+    log_info "Using TTL source directory: ${ttl_dir}"
 
     # Skip load if the database already has data
     local triple_count
@@ -186,7 +194,7 @@ load_staging_data() {
     local failed=0
 
     for file in "${!GRAPH_MAP[@]}"; do
-        local filepath="${STAGING_DIR}/${file}"
+        local filepath="${ttl_dir}/${file}"
         local graph_name="${GRAPH_MAP[$file]}"
         local graph_uri="${namespace_base}/${graph_name}"
 
